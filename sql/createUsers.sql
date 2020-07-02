@@ -1,14 +1,15 @@
-DROP TABLE users;
+DROP TABLE IF EXISTS users;
 CREATE TABLE users
 (
 	username varchar(15),
 	uid integer,
 	email varchar
 );
-insert into users(username, uid, email)
-	values
+insert into users
+	(username, uid, email)
+values
 	(
-		"admin",
+		'admin',
 		123,
-		"jack@jackv.dev"
+		'jack@jackv.dev'
 	);
