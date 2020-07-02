@@ -1,5 +1,5 @@
 PGUSER=dbuser \
-PGHOST=localhost \
+PGHOST='localhost' \
 PGPASSWORD=password \
 PGDATABASE=db \
 PGPORT=5432 \

@@ -19,17 +19,17 @@ const button = `<form action="/debug/"
 router.get("/", async(req, res) => {
     res.send(form)
 })
-router.get("/", async(req, res) => {
+router.post("/", async(req, res) => {
     console.log(req.body);
     res.setHeader('Content-type', 'text/html')
     res.write('<h2>query: </h2>\n')
-    res.write(utils.stringif(req.body.query))
+    res.write(utils.stringify(req.body.query))
     res.write('<h2>db response:</h2>\n')
     await db.query(req.body.query).then((result) => {
         Response.write(utils.stringify(result.rows));
     }).catch(err => {
         console.log(err)
-        res.write(err.stringify())
+        res.write(utils.stringify(err))
     });
     res.write("</br></br>" + button)
     res.end();

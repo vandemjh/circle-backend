@@ -5,12 +5,10 @@ CREATE TABLE users
 	uid integer,
 	email varchar
 );
-insert into users
-(
-	users(username, uid, email) values
+insert into users(username, uid, email)
+	values
 	(
 		"admin",
 		123,
 		"jack@jackv.dev"
-	)
-)
+	);
