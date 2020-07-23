@@ -23,7 +23,7 @@ router.post("/", async(req, res) => {
     console.log(req.body);
     res.setHeader('Content-type', 'text/html')
     res.write('<h2>query: </h2>\n')
-    res.write(utils.stringify(req.body.query))
+    res.write("<pre><code>" + utils.stringify(req.body.query)  + "</pre></code>")
     res.write('<h2>db response:</h2>\n')
     await db.query(req.body.query).then((result) => {
         Response.write(utils.stringify(result.rows));
