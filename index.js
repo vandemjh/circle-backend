@@ -1,9 +1,11 @@
-const express = require("express");
-const router = require("express-promise-router");
-const mountRoutes = require("./router");
+const express = require('express');
+const router = require('express-promise-router');
+const mountRoutes = require('./router');
 
-const app = express();
-const port = 3000;
-mountRoutes(app);
+const APP = express();
+const PORT = process.env.PORT || 3000;
+mountRoutes(APP);
 
-app.listen(port, () => console.log(`Listening on http://localhost:${port}`))
+// console.log(process.env);
+
+APP.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
