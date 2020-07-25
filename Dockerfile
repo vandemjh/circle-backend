@@ -1,9 +1,9 @@
-FROM node:6
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json /usr/src/app
-RUN npm cache clean
+FROM node
+RUN mkdir -p /serve
+WORKDIR /serve
+COPY package.json /serve
+# RUN npm cache clean
 RUN npm install
-COPY . /usr/src/app
+COPY . /serve
 EXPOSE 3000
 CMD ["npm","start"]
