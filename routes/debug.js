@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
     .then((result) => {
       res.write(
         utils.stringify(result.rows) == undefined
-          ? 'Probably worked...'
+          ? 'Probably worked... no rows returned'
           : // utils.stringify(result)
             utils.stringify(result.rows)
       );
