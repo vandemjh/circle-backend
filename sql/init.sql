@@ -1,3 +1,4 @@
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 DROP TABLE IF EXISTS posts CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TYPE IF EXISTS Comment_type CASCADE;
@@ -30,12 +31,12 @@ CREATE TYPE Post_type AS
 
 CREATE TABLE posts
 (
-    pid text,
+    pid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     post Post_type
 );
 
 CREATE TABLE users
 (
-    uid text,
+    uid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_col User_type
 );
