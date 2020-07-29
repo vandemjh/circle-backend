@@ -32,11 +32,11 @@ CREATE TYPE Post_type AS
 CREATE TABLE posts
 (
     pid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    post Post_type
+    post JSONB
 );
 
 CREATE TABLE users
 (
     uid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    user_col User_type
+    user_col JSONB
 );

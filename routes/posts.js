@@ -14,7 +14,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-    const result = await db.query('SELECT * FROM posts');
+    const result = await db.query('SELECT post FROM posts');
     res.send(utils.stringify(result.rows));
 });
 
