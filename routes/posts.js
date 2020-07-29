@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   console.log(req.body)
     const result = await db.query(
-        'INSERT INTO posts(post) VALUES($1)', [req.body]
+        'INSERT INTO posts(post) VALUES($1::Post_type)', [req.body]
     );
     res.send(utils.stringify(result.rows));
 });
