@@ -8,14 +8,12 @@ const APP = express();
 const PORT = process.env.PORT || 3000;
 mountRoutes(APP);
 
-
-fs.readFile('./sql/init.sql', 'utf8', (err, sql) => {
+if (process.env.STARTUP)
+  fs.readFile('./sql/init.sql', 'utf8', (err, sql) => {
     if (err) {
-        return console.log(err);
+      return console.log(err);
     }
-    db.query(sql.replace(/[\n\r]/g,"").replace(/    /g, ""))
-});
-
-// console.log(process.env);
+    db.query(sql.replace(/[\n\r]/g, '').replace(/    /g, ''));
+  });
 
 APP.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

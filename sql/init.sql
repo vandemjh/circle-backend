@@ -1,42 +1,25 @@
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 DROP TABLE IF EXISTS posts CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
-DROP TYPE IF EXISTS Comment_type CASCADE;
-DROP TYPE IF EXISTS Post_type CASCADE;
-DROP TYPE IF EXISTS User_type CASCADE;
-
-CREATE TYPE User_type AS 
-(
-    username text,
-    firstName text,
-    lastName text,
-    profilePictureURL text
-);
-
-CREATE TYPE Comment_type AS 
-(
-    commenter User_type,
-    comment text
-);
-
-CREATE TYPE Post_type AS
-(
-	poster User_type,
-    imageUrl text,
-    location text,
-    description text,
-    comments Comment_type[],
-    likes User_type[]
-);
+DROP TABLE IF EXISTS comments CASCADE;
 
 CREATE TABLE posts
 (
     pid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    post JSONB
+);
+
+CREATE TABLE comments
+(
+    pid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     post JSONB
 );
 
 CREATE TABLE users
 (
     uid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     user_col JSONB
 );
