@@ -13,7 +13,7 @@ CREATE TYPE User_type AS
 CREATE TYPE Comment_type AS 
 (
     commenter User_type,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP(),
+    created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP(),
     comment text
 );
 

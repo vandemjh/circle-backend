@@ -18,22 +18,29 @@ router.get('/:pid', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-  const result = await db.query('SELECT * FROM posts ORDER BY created_at');
+  const result = await db.query('SELECT * FROM posts ORDER BY created');
   res.send(result.rows);
 });
 
-router.get('/postedSince/:created_at', async (req, res) => {
-  var createdAt = req.params.created_at;
-  const result = await db.query('SELECT * FROM posts WHERE created_at > $1', [
-    createdAt,
+router.get('/postedSince/:created', async (req, res) => {
+  var created = req.params.created;
+  const result = await db.query('SELECT * FROM posts WHERE created > $1', [
+    created,
   ]);
   res.send(result.rows);
 });
 
 router.post('/', async (req, res) => {
-  const result = await db.query('INSERT INTO posts(post) VALUES($1)', [
-    req.body,
-  ]);
+  var poster = req.body.poster;
+  var comments = req.body.comments;
+  var likes = req.body.likes;
+  const result = await db.query(
+    ```
+    INSERT INTO posts(poster, comments, likes) 
+    VALUES($1, $2, $3)
+    ```,
+    [poster, comments, likes]
+  );
   // throw new Error("broken")
   res.send(result.rowCount >= 1);
 });

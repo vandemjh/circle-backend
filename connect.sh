@@ -3,4 +3,5 @@ PGHOST='localhost' \
 PGPASSWORD=password \
 PGDATABASE=db \
 PGPORT=5432 \
+STARTUP=true \
 node index.js
