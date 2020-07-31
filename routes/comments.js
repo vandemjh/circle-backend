@@ -20,10 +20,10 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   var comment = req.body.comment;
-  var commentor = req.body.commentor;
+  var commenter = req.body.commenter;
   const result = await db.query(
-    'INSERT INTO comments(comment, commentor) VALUES($1, $2) RETURNING *',
-    [comment, commentor]
+    'INSERT INTO comments(comment, commenter) VALUES($1, $2) RETURNING *',
+    [comment, commenter]
   );
   res.send(result.rows);
 });
