@@ -32,15 +32,15 @@ router.get('/postedSince/:created', async (req, res) => {
 
 router.post('/', async (req, res) => {
   var poster = req.body.poster;
-  var comments = req.body.comments;
-  var likes = req.body.likes;
+  //   var comments = req.body.comments;
+  //   var likes = req.body.likes;
   const result = await db.query(
-    ```
-    INSERT INTO posts(poster, comments, likes) 
-    VALUES($1, $2, $3)
-    ```,
-    [poster, comments, likes]
+    'INSERT INTO posts(poster) VALUES($1) RETURNING *',
+    [poster]
   );
+  // .then(db.query('INSERT INTO likes(lid)', [result.rows[0].likes]));
   // throw new Error("broken")
-  res.send(result.rowCount >= 1);
+//   console.log(result.rows);
+  res.send(result.rows);
+  //   res.send(result.rowCount >= 1);
 });

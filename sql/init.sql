@@ -8,17 +8,17 @@ CREATE TABLE posts
 (
     pid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    poster UUID,
     comments UUID DEFAULT gen_random_uuid(),
-    likes UUID DEFAULT gen_random_uuid()
+    likes UUID DEFAULT gen_random_uuid(),
+    poster UUID
 );
 
 CREATE TABLE comments
 (
     cid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    commentor UUID,
-    comment VARCHAR(10000)
+    comment VARCHAR(10000),
+    commentor UUID
 );
 
 CREATE TABLE users
@@ -34,5 +34,5 @@ CREATE TABLE users
 CREATE TABLE likes
 (
     lid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    likers UUID
+    liker UUID
 )
