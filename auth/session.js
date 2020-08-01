@@ -1,45 +1,26 @@
-require('dotenv').config();
-const request = require('request-promise');
-const btoa = require('btoa');
+const session = require('express-session');
+const { ExpressOIDC } = require('@okta/oidc-middleware');
+const crypto = require('crypto')
+const base64url = require('base64url')
 
-// CLIENT_SECRET
-const { ISSUER, CLIENT_ID, SCOPE } = process.env;
+var code_verifier = process.env.CODE_VERIFIER
+var hash = crypto.createHash('sha256').update(code_verifier).digest();
+var code_challenge = base64url.encode(hash)
 
-const [, , uri, method, body] = process.argv;
-if (!uri) {
-  console.log('Usage: node client {url} [{method}] [{jsonData}]');
-  process.exit(1);
-}
+// session support is required to use ExpressOIDC
+app.use(session({
+  secret: code_challenge,
+  resave: true,
+  saveUninitialized: false
+}));
 
-const sendAPIRequest = async () => {
-  const token = btoa(`${CLIENT_ID}:${CLIENT_SECRET}`);
-  try {
-    const auth = await request({
-      uri: `${ISSUER}/v1/token`,
-      json: true,
-      method: 'POST',
-      headers: {
-        authorization: `Basic ${token}`,
-      },
-      form: {
-        grant_type: 'client_credentials',
-        scope: SCOPE,
-      },
-    });
+const oidc = new ExpressOIDC({
+  issuer: process.env.ISSUER,
+  client_id: process.env.CLIENT_ID,
+  client_secret: code_challenge,
+  redirect_uri: 'http://localhost:3000/authorization-code/callback',
+  scope: 'circle-api'
+});
 
-    const response = await request({
-      uri,
-      method,
-      body,
-      headers: {
-        authorization: `${auth.token_type} ${auth.access_token}`,
-      },
-    });
-
-    console.log(response);
-  } catch (error) {
-    console.log(`Error: ${error.message}`);
-  }
-};
-
-sendAPIRequest();
+// ExpressOIDC attaches handlers for the /login and /authorization-code/callback routes
+app.use(oidc.router);

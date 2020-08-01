@@ -19,11 +19,14 @@
   "homepage": "https://github.com/vandemjh/circle-backend#readme",
   "dependencies": {
     "@okta/jwt-verifier": "^1.0.0",
+    "base64url": "^3.0.1",
     "body-parser": "^1.19.0",
     "btoa": "^1.2.1",
+    "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-promise-router": "^4.0.1",
+    "express-session": "^1.17.1",
     "pg": "^8.2.1",
     "request-promise": "^4.2.6"
   }

@@ -5,9 +5,11 @@ const mountRoutes = require('./router');
 const fs = require('fs');
 const db = require('./db/access');
 const authMiddleware = require('./auth/auth')
+const authSession = require('./auth/session')
 
 const APP = express();
 APP.use(authMiddleware)
+APP.use(authSession);
 const PORT = process.env.PORT || 3000;
 mountRoutes(APP);
 
