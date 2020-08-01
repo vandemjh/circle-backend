@@ -19,6 +19,7 @@
   "homepage": "https://github.com/vandemjh/circle-backend#readme",
   "dependencies": {
     "@okta/jwt-verifier": "^1.0.0",
+    "@okta/oidc-middleware": "^4.0.1",
     "base64url": "^3.0.1",
     "body-parser": "^1.19.0",
     "btoa": "^1.2.1",

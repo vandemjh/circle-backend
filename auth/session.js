@@ -1,26 +1,33 @@
 const session = require('express-session');
 const { ExpressOIDC } = require('@okta/oidc-middleware');
-const crypto = require('crypto')
-const base64url = require('base64url')
+const crypto = require('crypto');
+const base64url = require('base64url');
+const Router = require('express-promise-router');
+const router = new Router();
 
-var code_verifier = process.env.CODE_VERIFIER
+module.exports = router;
+
+var code_verifier = process.env.CODE_VERIFIER;
 var hash = crypto.createHash('sha256').update(code_verifier).digest();
-var code_challenge = base64url.encode(hash)
+var CODE_CHALLENGE = base64url.encode(hash);
 
 // session support is required to use ExpressOIDC
-app.use(session({
-  secret: code_challenge,
-  resave: true,
-  saveUninitialized: false
-}));
+router.use(
+  session({
+    secret: CODE_CHALLENGE,
+    resave: true,
+    saveUninitialized: false,
+  })
+);
 
 const oidc = new ExpressOIDC({
   issuer: process.env.ISSUER,
   client_id: process.env.CLIENT_ID,
-  client_secret: code_challenge,
-  redirect_uri: 'http://localhost:3000/authorization-code/callback',
-  scope: 'circle-api'
+  client_secret: CODE_CHALLENGE,
+  redirect_uri: process.env.REDIRECT_URL,
+  appBaseUrl: process.env.APP_BASE_URL,
+  scope: process.env.SCOPE,
 });
 
 // ExpressOIDC attaches handlers for the /login and /authorization-code/callback routes
-app.use(oidc.router);
+router.use(oidc.router);
