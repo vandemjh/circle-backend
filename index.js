@@ -3,11 +3,9 @@ const express = require('express');
 const mountRoutes = require('./router');
 const fs = require('fs');
 const db = require('./db/access');
-// const authMiddleware = require('./auth/auth');
 
 const APP = express();
-// APP.use(authMiddleware);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 mountRoutes(APP);
 
 if (process.env.STARTUP === 'true')
