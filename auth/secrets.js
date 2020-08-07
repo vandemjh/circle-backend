@@ -6,6 +6,8 @@ module.exports = router;
 
 router.get('/', async (req, res) => {
   res.send({
+    // grant_type: process.env.GRANT_TYPE,
+    audience: process.env.AUDIENCE,
     /**
      * Your Auth0 account domain such as `'example.auth0.com'`,
      * `'example.eu.auth0.com'` or , `'example.mycompany.com'`
@@ -38,7 +40,7 @@ router.get('/', async (req, res) => {
      * The location to use when storing cache data. Valid values are `memory` or `localstorage`.
      * The default setting is `memory`.
      */
-    cacheLocation: undefined,
+    cacheLocation: process.env.CACHE_LOCATION,
     /**
      * If true, refresh tokens are used to fetch new access tokens from the Auth0 server. If false, the legacy technique of using a hidden iframe and the `authorization_code` grant with `prompt=none` is used.
      * The default setting is `false`.
