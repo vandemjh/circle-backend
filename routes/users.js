@@ -15,7 +15,7 @@ router.get('/:uid', async (req, res) => {
 
 router.get('/', async (req, res) => {
   const result = await db.query(`SELECT * FROM users`);
-  res.send(utils.stringify(result.rows));
+  res.send(result.rows);
 });
 
 router.post('/', async (req, res) => {
