@@ -1,6 +1,7 @@
 const Router = require('express-promise-router');
-var jwt = require('express-jwt');
-var jwks = require('jwks-rsa');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
+const jwtAuthz = require('express-jwt-authz');
 
 var jwtCheck = jwt({
   secret: jwks.expressJwtSecret({
@@ -18,7 +19,7 @@ module.exports = (app) => {
   app.use(jwtCheck, (err, req, res, next) => {
     // err.name === 'UnauthorizedError' // Add custom error messages here
     if (err.name === 'UnauthorizedError') {
-      res.status(err.status).send('Internal error')
+      res.status(err.status).send('Unauthorized')
       return;
     }
   });

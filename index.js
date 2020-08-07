@@ -9,7 +9,6 @@ const APP = express();
 const PORT = process.env.PORT;
 
 if (!process.env.SKIP_LOGGING) logging.logger(APP);
-if (process.env.SKIP_TOKENS) protectRoutes(APP);
 mountRoutes(APP);
 if (!process.env.SKIP_LOGGING) logging.errorLogger(APP);
 
