@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const utils = require('./utils/utils');
 const mountRoutes = require('./router');
-const protectRoutes = require('./auth/protectRoutes');
+const protectRoutes = require('./auth/protect');
 var logging = require('./utils/logger');
 
 const APP = express();
