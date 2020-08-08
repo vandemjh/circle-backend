@@ -3,7 +3,6 @@ const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const jwtAuthz = require('express-jwt-authz');
 
-
 module.exports = {
   jwtCheck: jwt({
     secret: jwks.expressJwtSecret({
@@ -16,20 +15,12 @@ module.exports = {
     issuer: process.env.ISSUER,
     algorithms: ['RS256'],
   }),
-  checkScopes: jwtAuthz([ undefined ])
-    // app.use(jwtCheck, (err, req, res, next) => {
-    //   // err.name === 'UnauthorizedError' // Add custom error messages here
-    //   if (err.name === 'UnauthorizedError') {
-    //     res.status(err.status).send('Unauthorized')
-    //     return;
-    //   }
-    // }),
+  checkScopes: jwtAuthz([undefined]),
+  // app.use(jwtCheck, (err, req, res, next) => {
+  //   // err.name === 'UnauthorizedError' // Add custom error messages here
+  //   if (err.name === 'UnauthorizedError') {
+  //     res.status(err.status).send('Unauthorized')
+  //     return;
+  //   }
+  // }),
 };
-
-// router.get('/', function (req, res) {
-//   try {
-//     res.send('Secured Resource');
-//   } catch (UnauthorizedError) {
-//     res.send('Unauthorized');
-//   }
-// });

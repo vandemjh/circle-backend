@@ -6,6 +6,12 @@ var logging = require('./utils/logger');
 var mountErrors = require('./utils/error')
 
 const APP = express();
+if (process.env.NODE_ENV === 'production') {
+  process.env.DEBUG = undefined;
+  process.env.STARTUP = undefined;
+  process.env.SKIP_LOGGING = undefined;
+  process.env.SKIP_TOKENS = undefined;
+}
 const PORT = process.env.PORT;
 
 if (process.env.SKIP_LOGGING !== 'true') logging.logger(APP);
