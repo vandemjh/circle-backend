@@ -4,7 +4,7 @@ const fs = require('fs');
 module.exports = {
   stringify: (input) => JSON.stringify(input, null, 2),
   startup: () => {
-    fs.readFile('./sql/init.sql', 'utf8', () =>
+    fs.readFile('./sql/init.sql', 'utf8', (err, sql) =>
       db.query(sql.replace(/[\n\r]/g, '').replace(/    /g, ''))
     );
   },

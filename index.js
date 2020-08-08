@@ -8,13 +8,13 @@ var mountErrors = require('./utils/error')
 const APP = express();
 const PORT = process.env.PORT;
 
-if (process.env.SKIP_LOGGING === true) logging.logger(APP);
+if (process.env.SKIP_LOGGING !== 'true') logging.logger(APP);
 mountRoutes(APP);
 mountErrors(APP);
-if (process.env.SKIP_LOGGING === true) logging.errorLogger(APP);
+if (process.env.SKIP_LOGGING !== 'true') logging.errorLogger(APP);
 
-if (process.env.STARTUP === true) utils.startup();
-if (process.env.TEST_POSTS === true) utils.testPosts();
+if (process.env.STARTUP === 'true') utils.startup();
+if (process.env.TEST_POSTS === 'true') utils.testPosts();
 
 APP.listen(PORT, () =>
   console.log(

@@ -4,12 +4,12 @@ const debug = require('./routes/debug');
 const posts = require('./routes/posts');
 const secrets = require('./auth/secrets');
 
-if (process.env.SKIP_TOKENS === true) protect = null;
+if (process.env.SKIP_TOKENS === 'true') protect = null;
 
 module.exports = (app) => {
   app.use('/hello-world', protect.jwtCheck, (req, res) => res.send('hello world!'));
   app.use('/users', protect.jwtCheck, users);
-  app.use('/debug', protect.jwtCheck, debug);
+  if (process.env.DEBUG === 'true' && process.env.NODE_ENV !== 'production') app.use('/debug', debug);
   app.use('/posts', protect.jwtCheck, posts);
   app.use('/secrets', secrets);
 };
