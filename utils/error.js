@@ -4,6 +4,8 @@ module.exports = (app) => {
     if (err.name === 'UnauthorizedError') {
       res.status(err.status).send('Unauthorized');
       return;
+    } else {
+      console.log(err)
     }
   });
 };

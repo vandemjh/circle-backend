@@ -9,7 +9,7 @@ module.exports = {
     );
   },
   testPosts: () => {
-    db.query(`INSERT INTO users(username) VALUES('${'asdf'}') RETURNING uid`)
+    db.query(`INSERT INTO users(username, sub, email, picture) VALUES('test', 'test', 'test','test') RETURNING uid`)
       .then(
         (success) => {
           console.log('User created with uid: ' + success.rows[0].uid);

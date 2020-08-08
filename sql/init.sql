@@ -28,11 +28,18 @@ CREATE TABLE comments
 CREATE TABLE users
 (
     uid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    username VARCHAR(1000),
-    firstname VARCHAR(1000) DEFAULT NULL,
-    lastname VARCHAR(1000) DEFAULT NULL,
-    profilepictureurl varchar(1000) DEFAULT NULL
+    username VARCHAR(100) UNIQUE NOT NULL,
+    logins INTEGER NOT NULL DEFAULT 1,
+    sub VARCHAR(100) UNIQUE NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    picture VARCHAR(1000) DEFAULT NULL,
+    name VARCHAR(100) DEFAULT NULL,
+    email_verified boolean DEFAULT FALSE,
+    family_name VARCHAR(100) DEFAULT NULL,
+    given_name VARCHAR(100) DEFAULT NULL,
+    locale VARCHAR(100) DEFAULT 'en',
+    nickname VARCHAR(100) DEFAULT NULL,
+    created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMp
 );
 
 CREATE TABLE likes
