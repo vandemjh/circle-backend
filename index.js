@@ -9,6 +9,7 @@ const APP = express();
 if (process.env.NODE_ENV === 'production') {
   process.env.DEBUG = undefined;
   process.env.STARTUP = undefined;
+  process.env.TEST_POSTS = undefined;
   process.env.SKIP_LOGGING = undefined;
   process.env.SKIP_TOKENS = undefined;
 }
