@@ -1,7 +1,6 @@
 const db = require('../db/access');
 const Router = require('express-promise-router');
 var bodyParser = require('body-parser');
-const utils = require('../utils/utils');
 
 const router = new Router();
 router.use(bodyParser.json());
