@@ -8,7 +8,7 @@ module.exports = router;
 router.get('/:lid', async (req, res) => {
   const id = req.params.lid;
   const result = await db.query('SELECT * FROM likes WHERE lid = $1', [id]);
-  if (result.rowCount == 0) res.send([])
+  // if (result.rowCount == 0) res.send([])
   res.send(result.rows);
 });
 
