@@ -3,6 +3,7 @@ const users = require('./routes/users');
 const debug = require('./routes/debug');
 const posts = require('./routes/posts');
 const secrets = require('./auth/secrets');
+const comments = require('./routes/comments');
 const upload = require('./routes/upload');
 const login = require('./routes/login');
 const data = require('./routes/data');
@@ -15,6 +16,7 @@ module.exports = (app) => {
   app.use('/users', protect.jwtCheck, users);
   app.use('/posts', protect.jwtCheck, posts);
   app.use('/upload', protect.jwtCheck, upload);
+  app.use('/comments', protect.jwtCheck, comments);
   app.use('/login', protect.jwtCheck, login);
   app.use('/data', data);
 };
