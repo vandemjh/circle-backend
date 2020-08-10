@@ -40,6 +40,7 @@ router.post('/', async (req, res) => {
         console.log(err);
         return;
       });
+    // console.log(result.rows[0])
     res.send(result.rows[0]);
   }
 });
