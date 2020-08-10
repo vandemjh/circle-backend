@@ -1,6 +1,5 @@
 const Router = require('express-promise-router');
 const fileUpload = require('express-fileupload');
-const express = require('express');
 const { v4: uuid } = require('uuid');
 const router = new Router();
 
@@ -11,7 +10,6 @@ router.use(
     debug: process.env.DEBUG,
   })
 );
-router.use('/', express.static('./uploads'));
 
 router.post('/', function (req, res) {
   try {
@@ -23,7 +21,7 @@ router.post('/', function (req, res) {
 
     if (image.truncated)
       return res.status(413).send({ error: 'File too large' });
-    var link = `uploads/${uuid()}.${type}`;
+    var link = `data/${uuid()}.${type}`;
     image.mv(`./${link}`, (err) => {
       if (err) return res.status(500).send({ error: 'Error uploading file' });
     });

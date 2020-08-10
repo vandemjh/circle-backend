@@ -5,6 +5,7 @@ const posts = require('./routes/posts');
 const secrets = require('./auth/secrets');
 const upload = require('./routes/upload');
 const login = require('./routes/login');
+const data = require('./routes/data');
 
 if (process.env.SKIP_TOKENS === 'true') protect = null;
 
@@ -15,4 +16,5 @@ module.exports = (app) => {
   app.use('/posts', protect.jwtCheck, posts);
   app.use('/upload', protect.jwtCheck, upload);
   app.use('/login', protect.jwtCheck, login);
+  app.use('/data', data);
 };
