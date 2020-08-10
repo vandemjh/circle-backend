@@ -1,5 +1,6 @@
 const Router = require('express-promise-router');
 const fileUpload = require('express-fileupload');
+const express = require('express');
 const { v4: uuid } = require('uuid');
 const router = new Router();
 
@@ -10,12 +11,13 @@ router.use(
     debug: process.env.DEBUG,
   })
 );
+router.use('/', express.static('./uploads'));
 
 router.post('/', function (req, res) {
   try {
-    console.log(req.files)
+    console.log(req.files);
     var image = req.files.image;
-    const type = req.files.image.mimetype.split("/")[1];
+    const type = req.files.image.mimetype.split('/')[1];
     if (!req.files || !image)
       return res.status(400).send({ error: 'No files were uploaded.' });
 
@@ -25,7 +27,7 @@ router.post('/', function (req, res) {
     image.mv(`./${link}`, (err) => {
       if (err) return res.status(500).send({ error: 'Error uploading file' });
     });
-    res.send({payload: link});
+    res.send({ payload: link });
   } catch (err) {
     console.log(err);
   }
