@@ -19,7 +19,7 @@ CREATE TABLE posts
 
 CREATE TABLE comments
 (
-    cid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    cid UUID,
     created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     comment VARCHAR(100000),
     commenter UUID
