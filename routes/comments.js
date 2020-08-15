@@ -21,10 +21,11 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   var cid = req.body.cid;
   var comment = req.body.comment;
-  var commenter = req.body.commenter;
+  var uid = req.body.uid;
+  // if (!cid || !comment || !commenter) res.send()
   const result = await db.query(
-    'INSERT INTO comments(cid, comment, commenter) VALUES($1, $2, $3) RETURNING *',
-    [cid, comment, commenter]
+    'INSERT INTO comments(cid, comment, uid) VALUES($1, $2, $3) RETURNING *',
+    [cid, comment, uid]
   );
   // res.send(result.rows);
   res.send(true);

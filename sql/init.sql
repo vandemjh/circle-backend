@@ -22,7 +22,7 @@ CREATE TABLE comments
     cid UUID,
     created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     comment VARCHAR(100000),
-    commenter UUID
+    uid UUID NOT NULL
 );
 
 CREATE TABLE users
