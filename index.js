@@ -23,6 +23,7 @@ if (process.env.SKIP_LOGGING !== 'true') logging.errorLogger(APP);
 
 if (process.env.STARTUP === 'true') utils.startup();
 if (process.env.TEST_POSTS === 'true') utils.testPosts();
+if (process.env.DROP_TABLES === 'true') utils.dropTables();
 
 APP.listen(PORT, () =>
   console.log(

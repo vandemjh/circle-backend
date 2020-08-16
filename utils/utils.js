@@ -8,8 +8,16 @@ module.exports = {
       db.query(sql.replace(/[\n\r]/g, '').replace(/    /g, ''))
     );
   },
+  dropTables: () => {
+    db.query(`DROP TABLE IF EXISTS posts CASCADE;
+    DROP TABLE IF EXISTS comments CASCADE;
+    DROP TABLE IF EXISTS users CASCADE;
+    DROP TABLE IF EXISTS favorites CASCADE;`);
+  },
   testPosts: () => {
-    db.query(`INSERT INTO users(username, sub, email, picture) VALUES('test', 'test', 'test','test') RETURNING uid`)
+    db.query(
+      `INSERT INTO users(username, sub, email, picture) VALUES('test', 'test', 'test','test') RETURNING uid`
+    )
       .then(
         (success) => {
           console.log('User created with uid: ' + success.rows[0].uid);
