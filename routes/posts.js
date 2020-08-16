@@ -7,7 +7,7 @@ const router = new Router();
 router.use(bodyParser.json());
 module.exports = router;
 
-const POSTS_PER_PAGE = 10;
+const POSTS_PER_PAGE = 5;
 
 router.get('/:pid', async (req, res) => {
   const pid = req.params.pid;
@@ -53,6 +53,5 @@ router.post('/', async (req, res) => {
     'INSERT INTO posts(description, location, imageurl, uid) VALUES($1, $2, $3, $4) RETURNING *',
     [description, location, imageurl, uid]
   );
-  // .then(db.query('INSERT INTO likes(lid)', [result.rows[0].likes]));
   res.send(result.rows);
 });

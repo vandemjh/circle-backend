@@ -2,7 +2,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 DROP TABLE IF EXISTS posts CASCADE;
 DROP TABLE IF EXISTS comments CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS likes CASCADE;
+DROP TABLE IF EXISTS favorites CASCADE;
 SET timezone = 'America/New_York';
 
 CREATE TABLE posts
@@ -13,7 +13,7 @@ CREATE TABLE posts
     location VARCHAR(1000) DEFAULT null,
     imageurl VARCHAR(1000) DEFAULT null,
     cid UUID DEFAULT gen_random_uuid(),
-    lid UUID DEFAULT gen_random_uuid(),
+    fid UUID DEFAULT gen_random_uuid(),
     uid UUID NOT NULL
 );
 
@@ -42,8 +42,8 @@ CREATE TABLE users
     created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE likes
+CREATE TABLE favorites
 (
-    lid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    liker UUID
+    fid UUID PRIMARY KEY,
+    uid UUID
 )
