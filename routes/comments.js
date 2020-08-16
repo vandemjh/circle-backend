@@ -7,8 +7,8 @@ router.use(bodyParser.json());
 module.exports = router;
 
 router.get('/:cid', async (req, res) => {
-  const id = req.params.cid;
-  const result = await db.query('SELECT * FROM comments WHERE cid = $1', [id]);
+  const cid = req.params.cid;
+  const result = await db.query('SELECT * FROM comments WHERE cid = $1', [cid]);
   // if (result.rowCount == 0) res.send([])
   res.send(result.rows);
 });
@@ -16,6 +16,12 @@ router.get('/:cid', async (req, res) => {
 router.get('/', async (req, res) => {
   const result = await db.query('SELECT * FROM comments');
   res.send(result.rows);
+});
+
+router.get('/count/:cid', async (req, res) => {
+  const cid = req.params.cid;
+  const result = await db.query('SELECT COUNT(*) FROM comments WHERE cid = $1', [cid]);
+  res.send(result.rows[0].count);
 });
 
 router.post('/', async (req, res) => {
