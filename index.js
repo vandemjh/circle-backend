@@ -2,8 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const utils = require('./utils/utils');
 const mountRoutes = require('./router');
+const mountCors = require('./utils/cors');
 var logging = require('./utils/logger');
-var mountErrors = require('./utils/error')
+const mountErrors = require('./utils/error');
 
 const APP = express();
 if (process.env.NODE_ENV === 'production') {
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = process.env.PORT;
 
 if (process.env.SKIP_LOGGING !== 'true') logging.logger(APP);
+mountCors(APP);
 mountRoutes(APP);
 mountErrors(APP);
 if (process.env.SKIP_LOGGING !== 'true') logging.errorLogger(APP);
@@ -24,7 +26,7 @@ if (process.env.SKIP_LOGGING !== 'true') logging.errorLogger(APP);
 (async () => {
   if (process.env.DROP_TABLES === 'true') await utils.dropTables();
   if (process.env.STARTUP === 'true') await utils.startup();
-  await utils.wait() // Short delay
+  await utils.wait(); // Short delay
   if (process.env.TEST_POSTS === 'true') await utils.testPosts();
 })();
 
