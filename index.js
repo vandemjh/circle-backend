@@ -21,9 +21,12 @@ mountRoutes(APP);
 mountErrors(APP);
 if (process.env.SKIP_LOGGING !== 'true') logging.errorLogger(APP);
 
-if (process.env.STARTUP === 'true') utils.startup();
-if (process.env.TEST_POSTS === 'true') utils.testPosts();
-if (process.env.DROP_TABLES === 'true') utils.dropTables();
+(async () => {
+  if (process.env.DROP_TABLES === 'true') await utils.dropTables();
+  if (process.env.STARTUP === 'true') await utils.startup();
+  await utils.wait() // Short delay
+  if (process.env.TEST_POSTS === 'true') await utils.testPosts();
+})();
 
 APP.listen(PORT, () =>
   console.log(
