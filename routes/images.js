@@ -1,6 +1,6 @@
 const Router = require('express-promise-router');
 const db = require('../db/access');
-const btoa = require('btoa');
+// const btoa = require('btoa');
 const fs = require('fs');
 const router = new Router();
 const express = require('express');
@@ -20,10 +20,7 @@ router.get('/:iid', async (req, res) => {
   const image = result.rows[0].image;
   //   var binary = btoa(String.fromCharCode.apply(null, new Uint8Array(image)));
 
-//   console.log(image);
-//   fs.writeFile('img', image, 'base64', (err) => console.log(err));
-
-  return res.send(image);
   //   console.log(image);
-  res.send(image);
+  //   fs.writeFile('img', image, 'base64', (err) => console.log(err));
+  return res.send(image);
 });
