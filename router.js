@@ -7,7 +7,7 @@ const comments = require('./routes/comments');
 const upload = require('./routes/upload');
 const login = require('./routes/login');
 const favorites = require('./routes/favorites');
-const data = require('./routes/data');
+const images = require('./routes/images');
 
 if (process.env.SKIP_TOKENS === 'true') protect = null;
 
@@ -20,5 +20,5 @@ module.exports = (app) => {
   app.use('/comments', protect.jwtCheck, comments);
   app.use('/login', protect.jwtCheck, login);
   app.use('/favorites', protect.jwtCheck, favorites);
-  app.use('/data', data);
+  app.use('/images', images);
 };
