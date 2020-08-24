@@ -42,4 +42,10 @@ CREATE TABLE favorites
 (
     fid UUID PRIMARY KEY,
     uid UUID
-)
+);
+
+CREATE TABLE images 
+(
+    iid uuid PRIMARY KEY DEFAULT gen_random_uuid(), 
+    image bytea
+);
