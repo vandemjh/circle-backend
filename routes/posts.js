@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 router.get('/by/:uid', async (req, res) => {
   const uid = req.params.uid;
   const result = await db
-    .query('SELECT * FROM posts WHERE uid = $1', [uid])
+    .query('SELECT * FROM posts WHERE uid = $1 ORDER BY created DESC', [uid])
     .catch((err) => {
       res.status(500).send({ error: 'getbyuid error' })
       console.log(err)

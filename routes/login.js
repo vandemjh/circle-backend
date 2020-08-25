@@ -31,10 +31,10 @@ router.post('/', async (req, res) => {
   // User not in db
   else {
     const usernameExists = await db.query(
-      `SELECT COUNT(*) FROM users WHERE username = $1`[user.username]
+      `SELECT COUNT(*) FROM users WHERE username = $1`, [user.username]
     );
-    if (usernameExists[0].count !== '0')
-      res.status(500).send({ error: 'duplicate username' });
+    if (usernameExists.rows && usernameExists.rows[0]['count'] !== '0')
+      return res.status(500).send({ error: 'duplicate username' });
     const result = await db
       .query(
         `INSERT INTO users(username, sub, email, picture) VALUES($1, $2, $3, $4) RETURNING *`,
