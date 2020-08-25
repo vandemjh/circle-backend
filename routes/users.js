@@ -19,6 +19,12 @@ router.get('/sub/:sub', async (req, res) => {
   res.send(result.rows[0]);
 });
 
+router.get('/username/:username', async (req, res) => {
+  const id = req.params.username;
+  const result = await db.query(`SELECT * FROM users WHERE username = $1`, [id]);
+  res.send(result.rows[0]);
+});
+
 router.get('/', async (req, res) => {
   const result = await db.query(`SELECT * FROM users`);
   res.send(result.rows);
