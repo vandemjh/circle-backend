@@ -26,6 +26,18 @@ router.get('/', async (req, res) => {
   res.send(result.rows);
 });
 
+router.get('/by/:uid', async (req, res) => {
+  const uid = req.params.uid;
+  const result = await db
+    .query('SELECT * FROM posts WHERE uid = $1', [uid])
+    .catch((err) => {
+      res.status(500).send({ error: 'getbyuid error' })
+      console.log(err)
+      return;    
+    });
+  res.send(result.rows);
+});
+
 router.get('/postedBefore/:created', async (req, res) => {
   var created = req.params.created;
   const result = await db.query(
