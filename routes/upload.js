@@ -28,12 +28,8 @@ router.post('/', async (req, res) => {
       data,
     ]);
     // console.log(result.rows[0])
-    var link = `images/${result.rows[0].iid}`; //.${type}
-
-    // image.mv(`./${link}`, (err) => {
-    //   if (err) return res.status(500).send({ error: 'Error uploading file' });
-    // });
-    res.send({ payload: link });
+    var ret = result.rows[0].iid; //.${type}
+    res.send({ payload: ret });
   } catch (err) {
     console.log(err);
   }

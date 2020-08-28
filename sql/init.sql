@@ -7,7 +7,7 @@ CREATE TABLE posts
     created TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     description VARCHAR(10000) DEFAULT null,
     location VARCHAR(1000) DEFAULT null,
-    imageurl VARCHAR(1000) DEFAULT null,
+    iid UUID NOT NULL,
     cid UUID DEFAULT gen_random_uuid(),
     fid UUID DEFAULT gen_random_uuid(),
     uid UUID NOT NULL

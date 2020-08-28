@@ -59,11 +59,11 @@ router.get('/postedAfter/:created', async (req, res) => {
 router.post('/', async (req, res) => {
   var description = req.body.description;
   var location = req.body.location;
-  var imageurl = req.body.imageurl;
+  var iid = req.body.iid;
   var uid = req.body.uid;
   const result = await db.query(
-    'INSERT INTO posts(description, location, imageurl, uid) VALUES($1, $2, $3, $4) RETURNING *',
-    [description, location, imageurl, uid]
+    'INSERT INTO posts(description, location, iid, uid) VALUES($1, $2, $3, $4) RETURNING *',
+    [description, location, iid, uid]
   );
   res.send(result.rows);
 });
