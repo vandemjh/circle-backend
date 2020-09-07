@@ -61,6 +61,14 @@ read -p "PGDATABASE: " PGDATABASE
 cannotBeBlank $PGDATABASE
 read -p "PGPORT: " PGPORT
 cannotBeBlank $PGPORT
+echo '=== Done ==='
+read -p "Run in Production? (yes): " PROD
+if [ -z "$NODE_ENV" ] 
+then
+	NODE_ENV='production'
+else
+	NODE_ENV='development'
+fi
 
 sudo docker run \
 --env CLIENT_ID=$CLIENT_ID \
@@ -82,4 +90,5 @@ sudo docker run \
 --env PGDATABASE=$PGDATABASE \
 --env PGPORT=$PGPORT \
 -p $PORT:$PORT \
+-d \
 $(sudo docker build -q .)
