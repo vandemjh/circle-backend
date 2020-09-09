@@ -91,4 +91,6 @@ sudo docker run \
 --env PGPORT=$PGPORT \
 -p $PORT:$PORT \
 -d \
+--restart unless-stopped \
 $(sudo docker build -q .)
+
