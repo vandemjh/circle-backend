@@ -34,6 +34,7 @@
     "express-session": "^1.17.1",
     "express-winston": "^4.0.5",
     "jwks-rsa": "^1.8.1",
+    "memory-cache": "^0.2.0",
     "pg": "^8.2.1",
     "request-promise": "^4.2.6",
     "uuid": "^8.3.0",
