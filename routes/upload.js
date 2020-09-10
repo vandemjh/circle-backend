@@ -24,9 +24,10 @@ router.post('/', async (req, res) => {
     if (image.truncated)
       return res.status(413).send({ error: 'File too large' });
 
-    const result = await db.query(`INSERT INTO images(image) VALUES($1) RETURNING iid`, [
-      data,
-    ]);
+    const result = await db.query(
+      `INSERT INTO images(image) VALUES($1) RETURNING iid`,
+      [data]
+    );
     // console.log(result.rows[0])
     var ret = result.rows[0].iid; //.${type}
     res.send({ payload: ret });

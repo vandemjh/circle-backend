@@ -8,6 +8,7 @@ const upload = require('./routes/upload');
 const login = require('./routes/login');
 const favorites = require('./routes/favorites');
 const images = require('./routes/images');
+const cache = require('./utils/cache');
 
 if (process.env.SKIP_TOKENS === 'true') protect = null;
 
@@ -20,5 +21,5 @@ module.exports = (app) => {
   app.use('/comments', protect.jwtCheck, comments);
   app.use('/login', protect.jwtCheck, login);
   app.use('/favorites', protect.jwtCheck, favorites);
-  app.use('/images', images);
+  app.use('/images', cache(process.env.CACHE), images);
 };
