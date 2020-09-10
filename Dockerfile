@@ -6,4 +6,4 @@ COPY package.json /serve
 RUN npm install
 COPY . /serve
 EXPOSE 3000
-CMD ["npm","start"]
+CMD ["npm", "start", "--prod"]
