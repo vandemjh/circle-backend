@@ -1,6 +1,7 @@
+var mcache = require('memory-cache');
+
 module.exports = (duration) => {
-  var mcache = require('memory-cache');
-  return (req, res, next) => {
+  return async (req, res, next) => {
     let key = '__express__' + req.originalUrl || req.url;
     let cached = mcache.get(key);
     if (cached) {
@@ -11,7 +12,8 @@ module.exports = (duration) => {
       // console.log('Saving cache for next time!');
       res.sendResponse = res.send;
       res.send = (body) => {
-        mcache.put(key, body, duration * 1000 * 60 * 60);
+        // Duration is in days
+        mcache.put(key, body, duration * 1000 * 60 * 60 * 24);
         res.sendResponse(body);
       };
       next();
