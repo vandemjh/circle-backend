@@ -17,7 +17,7 @@ router.get('/:iid', async (req, res) => {
   if (process.env.COMPRESSION === 'true')
     imagemin
       .buffer(image, {
-        plugins: [imageminPngquant()],
+        // plugins: [imageminPngquant()],
       })
       .then((buffer) => {
         return res.send(buffer);
