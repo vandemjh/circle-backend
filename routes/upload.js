@@ -2,7 +2,7 @@ const Router = require('express-promise-router');
 const fileUpload = require('express-fileupload');
 const db = require('../db/access');
 const router = new Router();
-const sharp = require('sharp');
+// const sharp = require('sharp');
 
 module.exports = router;
 router.use(
