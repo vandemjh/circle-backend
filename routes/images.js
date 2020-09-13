@@ -2,7 +2,7 @@ const Router = require('express-promise-router');
 const db = require('../db/access');
 const router = new Router();
 const imagemin = require('imagemin');
-const imageminPngquant = require('imagemin-pngquant');
+// const imageminPngquant = require('imagemin-pngquant');
 
 module.exports = router;
 
