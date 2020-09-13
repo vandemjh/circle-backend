@@ -2,6 +2,7 @@ const Router = require('express-promise-router');
 const fileUpload = require('express-fileupload');
 const db = require('../db/access');
 const router = new Router();
+const imagemin = require('imagemin');
 // const sharp = require('sharp');
 
 module.exports = router;
@@ -24,22 +25,16 @@ router.post('/', async (req, res) => {
     if (!type) return res.status(415).send({ error: 'Mimetype error.' });
     if (image.truncated)
       return res.status(413).send({ error: 'File too large' });
-
     const result = await db.query(
       `INSERT INTO images(image) VALUES($1) RETURNING iid`,
       [data]
     );
-    // console.log(result.rows[0])
-    var ret = result.rows[0].iid; //.${type}
-    res.send({ payload: ret });
-    // sharp(data, { quality: 30 })
-    //   .jpeg()
-    //   .toBuffer()
-    //   .then((buffer) => {
-    //     console.log("size: " + buffer.length)
-    //     console.log("reduced size is: " + buffer.length / data.length * 100 + "% smaller");
-    //     // db.query(`INSERT INTO images(small) VALUES($1)`, [buffer]);
-    //   });
+    var iid = result.rows[0].iid; //.${type}
+    res.send({ payload: iid });
+    // Compress image and insert into minified
+    imagemin.buffer(data).then((buffer) => {
+      db.query(`UPDATE images SET minified = $1 WHERE iid = $2`, [buffer, iid]);
+    });
   } catch (err) {
     console.log(err);
   }

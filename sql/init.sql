@@ -46,6 +46,7 @@ CREATE TABLE favorites
 
 CREATE TABLE images 
 (
-    iid uuid PRIMARY KEY DEFAULT gen_random_uuid(), 
+    iid uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    minified bytea, 
     image bytea
 );

@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
   // process.env.STARTUP = undefined;
   process.env.DROP_TABLES = undefined;
   process.env.TEST_POSTS = undefined;
-  process.env.SKIP_LOGGING = undefined;
+  // process.env.SKIP_LOGGING = undefined;
   process.env.SKIP_TOKENS = undefined;
 }
 const PORT = process.env.PORT;
