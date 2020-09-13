@@ -1,12 +1,13 @@
 const Router = require('express-promise-router');
 const fileUpload = require('express-fileupload');
 const db = require('../db/access');
-const { v4: uuid } = require('uuid');
 const router = new Router();
+const sharp = require('sharp');
 
 module.exports = router;
 router.use(
   fileUpload({
+    // 50 mb
     limits: { fileSize: 50 * 1024 * 1024 },
     debug: process.env.DEBUG === 'true' && process.env.SKIP_LOGGING !== 'true',
   })
@@ -31,6 +32,14 @@ router.post('/', async (req, res) => {
     // console.log(result.rows[0])
     var ret = result.rows[0].iid; //.${type}
     res.send({ payload: ret });
+    // sharp(data, { quality: 30 })
+    //   .jpeg()
+    //   .toBuffer()
+    //   .then((buffer) => {
+    //     console.log("size: " + buffer.length)
+    //     console.log("reduced size is: " + buffer.length / data.length * 100 + "% smaller");
+    //     // db.query(`INSERT INTO images(small) VALUES($1)`, [buffer]);
+    //   });
   } catch (err) {
     console.log(err);
   }

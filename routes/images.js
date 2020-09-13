@@ -1,11 +1,7 @@
 const Router = require('express-promise-router');
 const db = require('../db/access');
-// const imagemin = require('imagemin');
-// const imageminJpegtran = require('imagemin-jpegtran');
-// const imageminPngquant = require('imagemin-pngquant');
-const fs = require('fs');
 const router = new Router();
-const express = require('express');
+const sharp = require('sharp');
 
 module.exports = router;
 
@@ -17,17 +13,13 @@ router.get('/:iid', async (req, res) => {
   if (!result || result.rows.length == 0)
     return res.status(404).send({ error: 'No such image.' });
   const image = result.rows[0].image;
-  // imagemin(['images/*.{jpg,png}'], {
-  //   plugins: [
-  //     // These are lossy
-  //     imageminJpegtran(),
-  //     imageminPngquant(),
-  //   ],
-  // });
-
-  //   var binary = btoa(String.fromCharCode.apply(null, new Uint8Array(image)));
-
-  //   console.log(image);
-  //   fs.writeFile('img', image, 'base64', (err) => console.log(err));
-  return res.send(image);
+  if (process.env.COMPRESSION === 'true')
+    // { quality: 10 }
+    sharp(image)
+      .jpeg()
+      .toBuffer()
+      .then((buffer) => {
+        return res.send(buffer);
+      });
+  else return res.send(image);
 });
