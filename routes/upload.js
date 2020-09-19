@@ -2,7 +2,7 @@ const Router = require('express-promise-router');
 const fileUpload = require('express-fileupload');
 const db = require('../db/access');
 const router = new Router();
-const imagemin = require('imagemin');
+const jimp = require('jimp');
 // const sharp = require('sharp');
 
 module.exports = router;
@@ -32,8 +32,16 @@ router.post('/', async (req, res) => {
     var iid = result.rows[0].iid; //.${type}
     res.send({ payload: iid });
     // Compress image and insert into minified
-    imagemin.buffer(data).then((buffer) => {
-      db.query(`UPDATE images SET minified = $1 WHERE iid = $2`, [buffer, iid]);
+    jimp.read(data).then((read) => {
+      read
+        .quality(20)
+        .getBufferAsync(read.getMIME())
+        .then((compressed) => {
+          db.query('UPDATE images SET minified = $1 WHERE iid = $2', [
+            compressed,
+            iid,
+          ]);
+        });
     });
   } catch (err) {
     console.log(err);

@@ -33,7 +33,7 @@
     "express-promise-router": "^4.0.1",
     "express-session": "^1.17.1",
     "express-winston": "^4.0.5",
-    "imagemin": "^7.0.1",
+    "jimp": "^0.16.1",
     "jwks-rsa": "^1.8.1",
     "memory-cache": "^0.2.0",
     "pg": "^8.2.1",
