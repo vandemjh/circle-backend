@@ -39,17 +39,17 @@ echo '--- Database ---'
 read -p "STARTUP (true): " STARTUP
 if [ -z "$STARTUP" ] 
 then
-	STARTUP='3000'
+	STARTUP='true'
 fi
 read -p "TEST_POSTS (false): " TEST_POSTS
 if [ -z "$TEST_POSTS" ] 
 then
-	TEST_POSTS='3000'
+	TEST_POSTS='false'
 fi
 read -p "DROP_TABLES (false): " DROP_TABLES
 if [ -z "$DROP_TABLES" ] 
 then
-	DROP_TABLES='3000'
+	DROP_TABLES='false'
 fi
 read -p "PGUSER: " PGUSER
 cannotBeBlank $PGUSER
