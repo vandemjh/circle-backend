@@ -6,4 +6,5 @@ COPY package.json /serve
 RUN npm install
 COPY . /serve
 EXPOSE 3000
+RUN npm test
 CMD ["npm", "start", "--prod"]
