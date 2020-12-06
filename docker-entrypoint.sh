@@ -89,7 +89,7 @@ sudo docker run \
 --env PGPASSWORD=$PGPASSWORD \
 --env PGDATABASE=$PGDATABASE \
 --env PGPORT=$PGPORT \
---env NODE_ENV=$NODE_ENV
+--env NODE_ENV=$NODE_ENV \
 -p $PORT:$PORT \
 -d \
 --restart unless-stopped \
