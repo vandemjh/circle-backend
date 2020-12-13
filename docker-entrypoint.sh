@@ -2,7 +2,7 @@ function cannotBeBlank() {
 	if [ -z "$1" ] 
 	then
 		echo field cannot be blank!
-		exit
+		exit 1
 	fi
 }
 echo '=== Circle Deploy ==='
@@ -30,6 +30,11 @@ read -p "PORT (3000): " PORT
 if [ -z "$PORT" ] 
 then
 	PORT='3000'
+fi
+read -p "MINIFIED (false): " MINIFIED
+if [ -z "$MINIFIED" ] 
+then
+	MINIFIED='false'
 fi
 read -p "JWKS_URI: " JWKS_URI
 cannotBeBlank $JWKS_URI
@@ -79,6 +84,7 @@ sudo docker run \
 --env SKIP_TOKENS=$SKIP_TOKENS \
 --env DEBUG=$DEBUG \
 --env PORT=$PORT \
+--env MINIFIED=$MINIFIED \
 --env JWKS_URI=$JWKS_URI \
 --env ISSUER=$ISSUER \
 --env STARTUP=$STARTUP \
